@@ -3,17 +3,17 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "$0")" && pwd)"
 BUNDLE_NAME="MyScreensaver.saver"
-BUNDLE_DIR="$ROOT_DIR/build/$BUNDLE_NAME"
+BUNDLE_DIR="/tmp/my-screensaver-build/$BUNDLE_NAME"
 INSTALL_DIR="$HOME/Library/Screen Savers"
 
-rm -rf "$BUNDLE_DIR"
+rm -rf "/tmp/my-screensaver-build"
 mkdir -p "$BUNDLE_DIR/Contents/MacOS" "$BUNDLE_DIR/Contents/Resources"
 
-cp "$ROOT_DIR/ScreensaverWrapper/Info.plist" "$BUNDLE_DIR/Contents/Info.plist"
+cp -X "$ROOT_DIR/ScreensaverWrapper/Info.plist" "$BUNDLE_DIR/Contents/Info.plist"
 printf "BNDL????" > "$BUNDLE_DIR/Contents/PkgInfo"
-cp "$ROOT_DIR/index.html" "$BUNDLE_DIR/Contents/Resources/index.html"
-cp "$ROOT_DIR/styles.css" "$BUNDLE_DIR/Contents/Resources/styles.css"
-cp "$ROOT_DIR/script.js" "$BUNDLE_DIR/Contents/Resources/script.js"
+cp -X "$ROOT_DIR/index.html" "$BUNDLE_DIR/Contents/Resources/index.html"
+cp -X "$ROOT_DIR/styles.css" "$BUNDLE_DIR/Contents/Resources/styles.css"
+cp -X "$ROOT_DIR/script.js" "$BUNDLE_DIR/Contents/Resources/script.js"
 
 clang \
   -fobjc-arc \
